@@ -20,11 +20,12 @@ jobs:
           latest: true
           extract: true
 
-      - run: dir
-
       - run: |
           Remove-Item -Path .\genomehubs-blobtk-*\.github -Recurse -Force
           Move-Item -Path .\genomehubs-blobtk-*\* -Destination .
+          Remove-Item -Path .\genomehubs-blobtk-*
+
+      - run: dir
 
       - uses: actions/setup-python@v5
         with:
@@ -37,6 +38,7 @@ jobs:
       - name: Build wheels
         run: ls -l wheelhouse
         env:
-          CIBW_SKIP: pp* *musllinux*
+          CIBW_BUILD: cp310-*
+          CIBW_SKIP: pp*
 
       - run: ls -l wheelhouse
