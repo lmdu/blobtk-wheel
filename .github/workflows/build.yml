@@ -22,6 +22,8 @@ jobs:
           python-version: '3.10'
 
       - uses: pypa/cibuildwheel@v3.2.1
+        with:
+          package-dir: rust
 
       - name: Build wheels
         run: ls -l wheelhouse
