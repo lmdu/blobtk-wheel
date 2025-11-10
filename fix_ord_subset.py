@@ -10,6 +10,6 @@ with open(config_file, 'w') as fw:
 		if line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
 			print('ord_subset = "3.1.2"', file=fw)
-			pirnt('openssl-sys = "0.9.111"', file=fw)
+			print('openssl-sys = "0.9.111"', file=fw)
 		else:
 			print(line, file=fw, end='')
