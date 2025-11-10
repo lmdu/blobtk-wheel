@@ -19,11 +19,10 @@ jobs:
           zipBall: true
           latest: true
           extract: true
-          out-file-path: .
 
       - run: |
-          rmdir /s /q ".\genomehubs-blobtk-*\.github"
-          move .\genomehubs-blobtk-*\* .
+          Remove-Item -LiteralPath .\genomehubs-blobtk-*\.github -Recurse -Force
+          Move-Item -LiteralPath .\genomehubs-blobtk-*\* -Destination .
 
       - run: dir
 
