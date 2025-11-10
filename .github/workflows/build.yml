@@ -35,7 +35,9 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: Install OpenSSL
-        run: vcpkg install openssl
+        run: choco install openssl
+
+      - run: dir C:\Program Files\OpenSSL-Win64
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
