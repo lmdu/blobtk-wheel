@@ -13,12 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Clone blobtk
-        run: |
-          git clone https://github.com/genomehubs/blobtk.git
-          Remove-Item -Path "blobtk\.github" -Force
-          Move-Item -Path "blobtk\*" -Destination .
-          Remove-Item -Path "blobtk"
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "genomehubs/blobtk"
+          tarBall: true
+          latest: true
+          extract: true
+
+      - run: dir
 
       - uses: actions/setup-python@v5
         with:
