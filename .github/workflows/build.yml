@@ -21,7 +21,9 @@ jobs:
           extract: true
           out-file-path: .
 
-      - run: copy .\genomehubs-blobtk-*\* .
+      - run: |
+          rmdir .\genomehubs-blobtk-*\.github
+          copy .\genomehubs-blobtk-*\* .
 
       - run: dir
 
