@@ -25,7 +25,9 @@ jobs:
           Move-Item -Path .\genomehubs-blobtk-*\* -Destination .
           Remove-Item -Path .\genomehubs-blobtk-*
 
-      - run: dir
+      - run: |
+          rustc --version
+          rustup update
 
       - uses: actions/setup-python@v5
         with:
