@@ -16,9 +16,9 @@ jobs:
       - name: Clone blobtk
         run: |
           git clone https://github.com/genomehubs/blobtk.git
-          dir
-          move blobtk/* .
-          rmdir blobtk
+          Remove-Item -Path blobtk\.github -Force
+          Move-Item -Path blobtk\* -Destination .
+          Remove-Item -Path blobtk
 
       - uses: actions/setup-python@v5
         with:
