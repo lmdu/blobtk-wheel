@@ -19,6 +19,9 @@ jobs:
           zipBall: true
           latest: true
           extract: true
+          out-file-path: .
+
+      - run: copy .\genomehubs-blobtk-*\* .
 
       - run: dir
 
