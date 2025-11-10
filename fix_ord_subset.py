@@ -10,6 +10,5 @@ with open(config_file, 'w') as fw:
 		if line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
 			print('ord_subset = "3.1.2"', file=fw)
-			print('hts_sys = "2.2.0"', file=fw)
 		else:
 			print(line, file=fw, end='')
