@@ -32,14 +32,12 @@ jobs:
           python-version: '3.10'
 
       - uses: pypa/cibuildwheel@v3.2.1
-        with:
-          package-dir: rust
-
-      - name: Build wheels
-        run: ls -l wheelhouse
         env:
+          CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
           CIBW_ARCHS_WINDOWS: amd64
           CIBW_BUILD: cp310-*
           CIBW_SKIP: pp*
+        with:
+          package-dir: rust
 
       - run: ls -l wheelhouse
