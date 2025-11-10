@@ -31,6 +31,9 @@ jobs:
         with:
           python-version: '3.10'
 
+      - uses: microsoft/setup-msbuild@v2
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
       - uses: pypa/cibuildwheel@v3.2.1
         env:
           CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
