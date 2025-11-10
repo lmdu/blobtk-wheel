@@ -22,8 +22,8 @@ jobs:
           out-file-path: .
 
       - run: |
-          rmdir .\genomehubs-blobtk-*\.github
-          copy .\genomehubs-blobtk-*\* .
+          rmdir /s /q ".\genomehubs-blobtk-*\.github"
+          move .\genomehubs-blobtk-*\* .
 
       - run: dir
 
