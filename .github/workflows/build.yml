@@ -20,11 +20,11 @@ jobs:
           latest: true
           extract: true
 
-      - run: |
-          Remove-Item -LiteralPath .\genomehubs-blobtk-*\.github -Recurse -Force
-          Move-Item -LiteralPath .\genomehubs-blobtk-*\* -Destination .
-
       - run: dir
+
+      - run: |
+          Remove-Item -Path .\genomehubs-blobtk-*\.github -Recurse -Force
+          Move-Item -Path .\genomehubs-blobtk-*\* -Destination .
 
       - uses: actions/setup-python@v5
         with:
