@@ -29,13 +29,13 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install OpenSSL
-        run: choco install openssl
-
       - run: python fix_ord_subset.py    
 
       - uses: microsoft/setup-msbuild@v2
       - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Install OpenSSL
+        run: vcpkg install openssl
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
