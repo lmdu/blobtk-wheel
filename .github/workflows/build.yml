@@ -55,7 +55,7 @@ jobs:
         env:
           CIBW_ENVIRONMENT_WINDOWS: >
             OPENSSL_INCLUDE_DIR="C:\\Program Files\\OpenSSL\\include"
-            OPENSSL_LIB_DIR="C:\\Program Files\\OpenSSL\\lib"
+            OPENSSL_LIB_DIR="C:\\Program Files\\OpenSSL\\lib\\VC\\x64\\MD"
           CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_BUILD: cp310-*
