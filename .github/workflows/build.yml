@@ -39,8 +39,8 @@ jobs:
         run: choco install openssl --no-progress
 
       - run: |
-          dir C:\ProgramData\chocolatey\lib
-          dir C:\ProgramData\chocolatey\include
+          dir C:/ProgramData/chocolatey
+          dir C:/ProgramData/chocolatey/lib/openssl
         #  dir C:/vcpkg/packages/openssl_x64-windows
         #  dir C:/vcpkg/packages/openssl_x64-windows/lib
         #  dir C:/vcpkg/packages/openssl_x64-windows/include
@@ -52,8 +52,7 @@ jobs:
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
-          OPENSSL_LIB_DIR: C:/vcpkg/packages/openssl_x64-windows/lib
-          OPENSSL_INCLUDE_DIR: C:/vcpkg/packages/openssl_x64-windows/include
+          CIBW_ENVIRONMENT_WINDOWS: OPENSSL_LIB_DIR=""
           CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_BUILD: cp310-*
