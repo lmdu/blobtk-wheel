@@ -29,11 +29,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      - run:  |
-          rustup self update
-          cd rust
-          cargo update
-
       #- run: python fix_ord_subset.py
 
       #- uses: microsoft/setup-msbuild@v2
