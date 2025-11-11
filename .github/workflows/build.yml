@@ -5,17 +5,13 @@ on: [push, pull_request]
 jobs:
   build_wheels:
     name: Build on ${{ matrix.os }}
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        target: [x64]
+        os: [windows-latest]
 
     steps:
       - uses: actions/checkout@v5
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -29,13 +25,17 @@ jobs:
           Move-Item -Path .\genomehubs-blobtk-*\* -Destination .
           Remove-Item -Path .\genomehubs-blobtk-*
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
       - run: python fix_ord_subset.py    
 
       - uses: microsoft/setup-msbuild@v2
       - uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      - name: Install OpenSSL
-        run: vcpkg install openssl
+      #- name: Install OpenSSL
+      #  run: vcpkg install openssl
 
       - run: |
           dir C:/vcpkg/packages/openssl_x64-windows
@@ -43,19 +43,13 @@ jobs:
           echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      #- uses: pypa/cibuildwheel@v3.2.1
-      #  env:
-      #    CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
-      #    CIBW_ARCHS_WINDOWS: AMD64
-      #    CIBW_BUILD: cp310-*
-      #    CIBW_SKIP: pp*
-      #  with:
-      #    package-dir: rust
-      - name: Build wheels
-        uses: PyO3/maturin-action@v1
+      - uses: pypa/cibuildwheel@v3.2.1
+        env:
+          CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
+          CIBW_ARCHS_WINDOWS: AMD64
+          CIBW_BUILD: cp310-*
+          CIBW_SKIP: pp*
         with:
-          target: ${{ matrix.target }}
-          args: --release --out dist --find-interpreter -m rust/Cargo.toml
-          sccache: "true"
+          package-dir: rust
 
-      - run: ls -l wheels
+      - run: ls -l wheelhouse
