@@ -34,8 +34,8 @@ jobs:
       - uses: microsoft/setup-msbuild@v2
       - uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      - name: Install OpenSSL
-        run: vcpkg install openssl:x64-windows
+      #- name: Install OpenSSL
+      #  run: vcpkg install openssl:x64-windows
         #run: choco install openssl --no-progress
 
       - run: |
@@ -53,10 +53,10 @@ jobs:
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
+          CIBW_BEFORE_BUILD_WINDOWS: ${{ github.workspace }}/.github/switch-openssl.bat
           CIBW_ENVIRONMENT_WINDOWS: >
-            OPENSSL_DIR="C:\\vcpkg\\packages\\openssl_x64-windows"
-            OPENSSL_LIB_DIR="C:\\vcpkg\\packages\\openssl_x64-windows\\lib"
-            OPENSSL_INCLUDE_DIR="C:\\vcpkg\\packages\\openssl_x64-windows\\include"
+            OPENSSL_INCLUDE_DIR="./openssl/include"
+            OPENSSL_LIBRARY_DIR="./openssl/lib"
           CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_BUILD: cp310-*
