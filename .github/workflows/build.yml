@@ -13,6 +13,22 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          update: false
+          install: >-
+            mingw-w64-x86_64-autotools
+            mingw-w64-x86_64-bzip2
+            mingw-w64-x86_64-curl
+            mingw-w64-x86_64-libdeflate
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-tools-git
+            mingw-w64-x86_64-xz
+            mingw-w64-x86_64-zlib
+            make
+            gcc
+
       - uses: robinraju/release-downloader@v1
         with:
           repository: "genomehubs/blobtk"
@@ -50,22 +66,6 @@ jobs:
         #  echo "OPENSSL_DIR=C:/vcpkg/packages/openssl_x64-windows" | Out-File -FilePath $env:GITHUB_ENV -Append
         #  echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
         #  echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
-
-      - uses: msys2/setup-msys2@v2
-        with:
-          msystem: mingw64
-          update: false
-          install: >-
-            mingw-w64-x86_64-autotools
-            mingw-w64-x86_64-bzip2
-            mingw-w64-x86_64-curl
-            mingw-w64-x86_64-libdeflate
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-tools-git
-            mingw-w64-x86_64-xz
-            mingw-w64-x86_64-zlib
-            make
-            gcc
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
