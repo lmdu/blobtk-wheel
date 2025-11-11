@@ -36,10 +36,11 @@ jobs:
 
       - name: Install OpenSSL
         #run: vcpkg install openssl:x64-windows
-        run: choco install openssl
+        run: choco install openssl --no-progress
 
       - run: |
-          dir C:/Program Files/OpenSSL-Win64
+          dir C:\ProgramData\chocolatey\lib
+          dir C:\ProgramData\chocolatey\include
         #  dir C:/vcpkg/packages/openssl_x64-windows
         #  dir C:/vcpkg/packages/openssl_x64-windows/lib
         #  dir C:/vcpkg/packages/openssl_x64-windows/include
