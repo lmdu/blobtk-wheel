@@ -21,9 +21,9 @@ jobs:
           extract: true
 
       - run: |
-          Remove-Item -Path .\genomehubs-blobtk-*\.github -Recurse -Force
-          Move-Item -Path .\genomehubs-blobtk-*\* -Destination .
-          Remove-Item -Path .\genomehubs-blobtk-*
+          rm -rf genomehubs-blobtk-*\.github
+          mv genomehubs-blobtk-*\* .
+          rm -rf .\genomehubs-blobtk-*
 
       - uses: actions/setup-python@v5
         with:
