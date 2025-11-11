@@ -9,8 +9,8 @@ with open(config_file, 'w') as fw:
 	for line in lines:
 		if line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
-			print('openssl = "0.10"', file=fw)
-			print('hts_sys = "2.2.0"', file=fw)
+			print('openssl = "0.10.75"', file=fw)
+			print('hts-sys = "2.2.0"', file=fw)
 			print('ord_subset = "3.1.2"', file=fw)
 		else:
 			print(line, file=fw, end='')
