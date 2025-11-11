@@ -51,14 +51,33 @@ jobs:
         #  echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
         #  echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
 
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          update: false
+          install: >-
+            mingw-w64-x86_64-autotools
+            mingw-w64-x86_64-bzip2
+            mingw-w64-x86_64-curl
+            mingw-w64-x86_64-libdeflate
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-tools-git
+            mingw-w64-x86_64-xz
+            mingw-w64-x86_64-zlib
+            make
+            gcc
+
       - uses: pypa/cibuildwheel@v3.2.1
         env:
-          CIBW_ENVIRONMENT_WINDOWS: >
-            RUST_BACKTRACE=1
-            OPENSSL_INCLUDE_DIR="C:\\Program Files\\OpenSSL\\include"
-            DEP_OPENSSL_INCLUDE="C:\\Program Files\\OpenSSL\\include"
-            OPENSSL_LIB_DIR="C:\\Program Files\\OpenSSL\\lib\\VC\\x64\\MD"
+          #CIBW_ENVIRONMENT_WINDOWS: >
+          #  RUST_BACKTRACE=1
+          #  OPENSSL_INCLUDE_DIR="C:\\Program Files\\OpenSSL\\include"
+          #  DEP_OPENSSL_INCLUDE="C:\\Program Files\\OpenSSL\\include"
+          #  OPENSSL_LIB_DIR="C:\\Program Files\\OpenSSL\\lib\\VC\\x64\\MD"
           #CIBW_BEFORE_ALL_WINDOWS: rustup self update && cd rust && cargo update && cd .. && rustup target add i686-pc-windows-msvc
+          LIB: ${{ github.workspace }}\msys64\mingw64\lib;$env:LIB
+          INCLUDE: ${{ github.workspace }}\msys64\mingw64\include;$env:INCLUDE
+          RUSTFLAGS: '-C link-args=-L${{ github.workspace }}/msys64/mingw64/lib'
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_BUILD: cp310-*
           CIBW_SKIP: pp*
