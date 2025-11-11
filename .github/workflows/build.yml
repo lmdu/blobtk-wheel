@@ -54,6 +54,7 @@ jobs:
       - uses: pypa/cibuildwheel@v3.2.1
         env:
           CIBW_ENVIRONMENT_WINDOWS: >
+            RUST_BACKTRACE=1
             OPENSSL_INCLUDE_DIR="C:\\Program Files\\OpenSSL\\include"
             OPENSSL_LIB_DIR="C:\\Program Files\\OpenSSL\\lib\\VC\\x64\\MD"
           #CIBW_BEFORE_ALL_WINDOWS: rustup self update && cd rust && cargo update && cd .. && rustup target add i686-pc-windows-msvc
