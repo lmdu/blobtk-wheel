@@ -36,6 +36,7 @@ jobs:
             mingw-w64-x86_64-python-maturin
             make
             gcc
+            cmake
 
       - uses: robinraju/release-downloader@v1
         with:
