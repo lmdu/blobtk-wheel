@@ -37,9 +37,9 @@ jobs:
           extract: true
 
       - run: |
-          rm -rf genomehubs-blobtk-*\.github
-          mv genomehubs-blobtk-*\* .
-          rm -rf .\genomehubs-blobtk-*
+          rm -rf genomehubs-blobtk-*/.github
+          mv genomehubs-blobtk-*/* .
+          rm -rf ./genomehubs-blobtk-*
 
       - uses: actions/setup-python@v5
         with:
