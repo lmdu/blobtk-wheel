@@ -35,17 +35,19 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: Install OpenSSL
-        run: vcpkg install openssl:x64-windows
+        #run: vcpkg install openssl:x64-windows
+        run: choco install openssl
 
       - run: |
-          #cargo update
-          dir C:/vcpkg/packages/openssl_x64-windows
-          dir C:/vcpkg/packages/openssl_x64-windows/lib
-          dir C:/vcpkg/packages/openssl_x64-windows/include
-          echo "VCPKG_ROOT=C:/vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_DIR=C:/vcpkg/packages/openssl_x64-windows" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include/openssl" | Out-File -FilePath $env:GITHUB_ENV -Append
+          dir C:/Program Files/OpenSSL-Win64
+        #  dir C:/vcpkg/packages/openssl_x64-windows
+        #  dir C:/vcpkg/packages/openssl_x64-windows/lib
+        #  dir C:/vcpkg/packages/openssl_x64-windows/include
+        #  dir C:/vcpkg/packages/openssl_x64-windows/include/openssl
+        #  echo "VCPKG_ROOT=C:/vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "OPENSSL_DIR=C:/vcpkg/packages/openssl_x64-windows" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
