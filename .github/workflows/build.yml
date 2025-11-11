@@ -31,15 +31,17 @@ jobs:
 
       - run: python fix_ord_subset.py    
 
-      - uses: microsoft/setup-msbuild@v2
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      #- uses: microsoft/setup-msbuild@v2
+      #- uses: actions-rust-lang/setup-rust-toolchain@v1
 
       #- name: Install OpenSSL
       #  run: vcpkg install openssl:x64-windows
         #run: choco install openssl --no-progress
 
       - run: |
-          dir "C:/Program Files/OpenSSL/include"
+          dir "C:\\Program Files\\OpenSSL\\include"
+          dir "C:\\Program Files\\OpenSSL"
+          dir "C:\\Program Files\\OpenSSL\\lib\VC\static"
         #  dir C:/ProgramData/chocolatey
         #  dir C:/ProgramData/chocolatey/lib/openssl
         #  dir C:/vcpkg/packages/openssl_x64-windows
@@ -53,10 +55,9 @@ jobs:
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
-          CIBW_BEFORE_BUILD_WINDOWS: ${{ github.workspace }}/.github/switch-openssl.bat
           CIBW_ENVIRONMENT_WINDOWS: >
-            OPENSSL_INCLUDE_DIR="./openssl/include"
-            OPENSSL_LIBRARY_DIR="./openssl/lib"
+            OPENSSL_INCLUDE_DIR="C:\\Program Files\\OpenSSL\\include"
+            OPENSSL_LIB_DIR="C:\\Program Files\\OpenSSL\\lib"
           CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_BUILD: cp310-*
