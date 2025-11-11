@@ -32,6 +32,8 @@ jobs:
             mingw-w64-x86_64-xz
             mingw-w64-x86_64-zlib
             mingw-w64-x86_64-rust
+            mingw-w64-x86_64-openssl
+            mingw-w64-x86_64-python-maturin
             make
             gcc
 
@@ -80,11 +82,17 @@ jobs:
       #    CIBW_SKIP: pp*
       #  with:
       #    package-dir: rust
-      - name: build wheels
-        uses: PyO3/maturin-action@v1
-        with:
-          target: x86_64-pc-windows-gnu
-          args: --release --out dist --find-interpreter -m rust/Cargo.toml
-          sccache: "true"
+      #- name: build wheels
+      #  uses: PyO3/maturin-action@v1
+      #  with:
+      #    target: x86_64-pc-windows-gnu
+      #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
+      #    sccache: "true"
+      - run: |
+          echo "PKG_CONFIG=$(command -v pkg-config)" >> ${GITHUB_ENV}
+          echo "PKG_CONFIG_PATH=/mingw64/lib/pkgconfig:${PKG_CONFIG_PATH}" >> ${GITHUB_ENV}
+          echo "${PKG_CONFIG_PATH}"
 
-      - run: ls -l wheelhouse
+      - run: maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu 
+
+      - run: ls -l dist
