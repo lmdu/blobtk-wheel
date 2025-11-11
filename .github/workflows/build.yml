@@ -5,13 +5,17 @@ on: [push, pull_request]
 jobs:
   build_wheels:
     name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     strategy:
       matrix:
-        os: [windows-latest]
+        target: [x64]
 
     steps:
       - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -24,10 +28,6 @@ jobs:
           Remove-Item -Path .\genomehubs-blobtk-*\.github -Recurse -Force
           Move-Item -Path .\genomehubs-blobtk-*\* -Destination .
           Remove-Item -Path .\genomehubs-blobtk-*
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
 
       - run: python fix_ord_subset.py    
 
@@ -43,13 +43,19 @@ jobs:
           echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - uses: pypa/cibuildwheel@v3.2.1
-        env:
-          CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
-          CIBW_ARCHS_WINDOWS: AMD64
-          CIBW_BUILD: cp310-*
-          CIBW_SKIP: pp*
+      #- uses: pypa/cibuildwheel@v3.2.1
+      #  env:
+      #    CIBW_BEFORE_ALL_WINDOWS: rustup target add i686-pc-windows-msvc
+      #    CIBW_ARCHS_WINDOWS: AMD64
+      #    CIBW_BUILD: cp310-*
+      #    CIBW_SKIP: pp*
+      #  with:
+      #    package-dir: rust
+      - name: Build wheels
+        uses: PyO3/maturin-action@v1
         with:
-          package-dir: rust
+          target: ${{ matrix.target }}
+          args: --release --out dist --find-interpreter -m rust/Cargo.toml
+          sccache: "true"
 
-      - run: ls -l wheelhouse
+      - run: ls -l wheels
