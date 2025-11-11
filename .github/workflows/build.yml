@@ -39,9 +39,7 @@ jobs:
         #run: choco install openssl --no-progress
 
       - run: |
-          dir "C:\\Program Files\\OpenSSL\\include"
-          dir "C:\\Program Files\\OpenSSL"
-          dir "C:\\Program Files\\OpenSSL\\lib"
+          tree "C:\\Program Files\\OpenSSL" /f
         #  dir C:/ProgramData/chocolatey
         #  dir C:/ProgramData/chocolatey/lib/openssl
         #  dir C:/vcpkg/packages/openssl_x64-windows
