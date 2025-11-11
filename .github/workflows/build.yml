@@ -2,10 +2,10 @@ name: build
 
 on: [push, pull_request]
 
-env:
-  OPENSSL_INCLUDE_DIR: "C:\\Program Files\\OpenSSL\\include"
-  DEP_OPENSSL_INCLUDE: "C:\\Program Files\\OpenSSL\\include"
-  OPENSSL_LIB_DIR: "C:\\Program Files\\OpenSSL\\lib\\VC\\x64\\MD"
+#env:
+#  OPENSSL_INCLUDE_DIR: "C:\\Program Files\\OpenSSL\\include"
+#  DEP_OPENSSL_INCLUDE: "C:\\Program Files\\OpenSSL\\include"
+#  OPENSSL_LIB_DIR: "C:\\Program Files\\OpenSSL\\lib\\VC\\x64\\MD"
 
 jobs:
   build_wheels:
