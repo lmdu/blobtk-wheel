@@ -39,7 +39,7 @@ jobs:
           echo "VCPKG_ROOT=${{ github.workspace }}\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Append
           vcpkg install openssl
 
-      - run: dir
+      - run: dir C:/vcpkg/packages/openssl_x64-windows
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
