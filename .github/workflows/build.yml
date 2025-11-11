@@ -39,6 +39,8 @@ jobs:
 
       - run: |
           dir C:/vcpkg/packages/openssl_x64-windows
+          dir C:/vcpkg/packages/openssl_x64-windows/lib
+          dir dir C:/vcpkg/packages/openssl_x64-windows/include
           echo "VCPKG_ROOT=C:/vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "OPENSSL_DIR=C:/vcpkg/packages/openssl_x64-windows" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
