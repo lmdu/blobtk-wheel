@@ -52,9 +52,9 @@ jobs:
           mv genomehubs-blobtk-*/* .
           rm -rf ./genomehubs-blobtk-*
 
-      #- uses: actions/setup-python@v5
-      #  with:
-      #    python-version: 3.10
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
 
       #- run: python fix_ord_subset.py
 
@@ -78,20 +78,25 @@ jobs:
         #  echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
         #  echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      #- uses: pypa/cibuildwheel@v3.2.1
-      #  env:
-      #    CIBW_ARCHS_WINDOWS: AMD64
-      #    CIBW_BUILD: cp310-*
-      #    CIBW_SKIP: pp*
-      #  with:
-      #    package-dir: rust
+      - uses: pypa/cibuildwheel@v3.2.1
+        env:
+          CIBW_BEFORE_BUILD: dir C:\\msys64\\mingw64\\bin
+          CIBW_ENVIRONMENT: >
+            CC=x86_64-w64-mingw32-gcc
+            CXX=x86_64-w64-mingw32-g++
+            PATH=C:\msys64\mingw64\bin;%PATH%
+          CIBW_ARCHS_WINDOWS: auto64 
+          CIBW_BUILD: cp310-*
+          CIBW_SKIP: pp*
+        with:
+          package-dir: rust
       #- name: build wheels
       #  uses: PyO3/maturin-action@v1
       #  with:
       #    target: x86_64-pc-windows-gnu
       #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
       #    sccache: "true"
-      - run:
-          maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml
+      #- run:
+      #    maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml
 
       - run: ls -l wheelhouse
