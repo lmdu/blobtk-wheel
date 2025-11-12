@@ -94,6 +94,9 @@ jobs:
       #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
       #    sccache: "true"
       - run: |
+          cd rust
+          cargo update
+          cd ..
           maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml
 
       - run: ls -l wheelhouse
