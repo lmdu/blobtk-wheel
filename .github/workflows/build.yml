@@ -37,6 +37,7 @@ jobs:
             mingw-w64-x86_64-htslib
             base-devel
             autoconf
+            diffutils
 
       - uses: robinraju/release-downloader@v1
         with:
