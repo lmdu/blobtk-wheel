@@ -98,6 +98,6 @@ jobs:
           python -m pip install cibuildwheel==3.2.1
 
       - name: Build wheels
-        run: python -m cibuildwheel --package-dir rust --output-dir wheelhouse
+        run: python -m cibuildwheel --output-dir wheelhouse rust
 
       - run: ls -l wheelhouse
