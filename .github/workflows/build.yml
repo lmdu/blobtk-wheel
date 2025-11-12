@@ -50,6 +50,9 @@ jobs:
           mv genomehubs-blobtk-*/* .
           rm -rf ./genomehubs-blobtk-*
 
+      - run: |
+          tree C:\\msys64\\mingw64\\bin
+
       #- uses: actions/setup-python@v5
       #  with:
       #    python-version: 3.10
@@ -101,7 +104,7 @@ jobs:
       #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
 
       - run: |
-          which maturin
+          echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
           maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
 
       - run: ls -l dist
