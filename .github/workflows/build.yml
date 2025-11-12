@@ -36,7 +36,6 @@ jobs:
             autoconf
             make
             gcc
-            g++
             cmake
             curl
             tar
