@@ -32,13 +32,10 @@ jobs:
             mingw-w64-x86_64-python-pip
             mingw-w64-x86_64-python-maturin
             mingw-w64-x86_64-pkg-config
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-make
             base-devel
             autoconf
-            make
-            gcc
-            cmake
-            curl
-            tar
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -97,9 +94,6 @@ jobs:
       #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
       #    sccache: "true"
       - run: |
-          cd rust
-          cargo update
-          cd ..
           maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml
 
       - run: ls -l wheelhouse
