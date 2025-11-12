@@ -91,13 +91,7 @@ jobs:
       #    target: x86_64-pc-windows-gnu
       #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
       #    sccache: "true"
-      - name: Install cibuildwheel
-        run: |
-          python --version
-          pip --version
-          python -m pip install cibuildwheel==3.2.1
-
-      - name: Build wheels
-        run: python -m cibuildwheel --output-dir wheelhouse rust
+      - run:
+          maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x64
 
       - run: ls -l wheelhouse
