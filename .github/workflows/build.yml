@@ -34,6 +34,7 @@ jobs:
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-make
+            mingw-w64-x86_64-htslib
             base-devel
             autoconf
 
@@ -93,13 +94,14 @@ jobs:
       #    target: x86_64-pc-windows-gnu
       #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
       #    sccache: "true"
-      - run: |
-          which gcc
-          echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $env:GITHUB_ENV
-          echo "OPENSSL_DIR=/mingw64" >> $env:GITHUB_ENV
-          echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
+      #- run: |
+      #    which gcc
+      #    echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $env:GITHUB_ENV
+      #    echo "OPENSSL_DIR=/mingw64" >> $env:GITHUB_ENV
+      #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
 
       - run: |
+          which maturin
           maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
 
       - run: ls -l dist
