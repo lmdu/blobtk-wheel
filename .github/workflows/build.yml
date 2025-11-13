@@ -38,8 +38,10 @@ jobs:
             base-devel
             autoconf
             diffutils
+            tree
 
       - run: |
+          tree /mingw64
           which gcc
           which ar
           gcc --version
