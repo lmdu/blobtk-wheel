@@ -113,6 +113,6 @@ jobs:
           echo "OPENSSL_DIR=/mingw64" >> $GITHUB_ENV
           echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $GITHUB_ENV
           echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $GITHUB_ENV
-          maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
+          maturin build --release --out dist --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
 
       - run: ls -l dist
