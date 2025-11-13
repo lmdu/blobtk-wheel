@@ -39,6 +39,12 @@ jobs:
             autoconf
             diffutils
 
+      - run: |
+        which gcc
+        which ar
+        gcc --version
+        ar --version
+
       - uses: robinraju/release-downloader@v1
         with:
           repository: "genomehubs/blobtk"
