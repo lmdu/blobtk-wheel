@@ -102,7 +102,7 @@ jobs:
       #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
 
       - run: |
-          echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
+          OPENSSL_DRI=/mingw64
           maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
 
       - run: ls -l dist

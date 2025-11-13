@@ -12,7 +12,7 @@ with open(config_file, 'w') as fw:
 			#print('openssl = "0.10.75"', file=fw)
 			#print('hts-sys = "2.2.0"', file=fw)
 			#print('ord_subset = "3.1.2"', file=fw)
-			print('[target.x86_64-windows-gnu]', file=fw)
+			print('[target.x86_64-pc-windows-gnu]', file=fw)
 			print('linker="gcc"')
 			print('rustflags=["-C", "target-feature=+crt-static"]', file=fw)
 			print()
