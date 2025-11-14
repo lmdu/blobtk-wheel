@@ -87,9 +87,9 @@ jobs:
         env:
           CIBW_ENVIRONMENT_WINDOWS: >
             CARGO_BUILD_TARGET="x86_64-pc-windows-gnu"
-            OPENSSL_LIB_DIR="C:/msys64/mingw64/lib"
-            OPENSSL_DIR="C:/msys64/mingw64"
-            OPENSSL_INCLUDE_DIR=C:/msys64/mingw64/include"
+            OPENSSL_LIB_DIR="C:\\msys64\\mingw64\\lib"
+            OPENSSL_DIR="C:\\msys64\\mingw64"
+            OPENSSL_INCLUDE_DIR=C:\\msys64\\mingw64\\include"
             PATH="C:\\msys64\\mingw64\\bin;$PATH%"
           CIBW_ARCHS_WINDOWS: auto64 
           CIBW_BUILD: cp310-*
