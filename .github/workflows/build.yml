@@ -72,7 +72,8 @@ jobs:
           echo "OPENSSL_LIB_DIR=C:/msys64/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "OPENSSL_INCLUDE_DIR=C:/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "RUST_BACKTRACE=full" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "CARGO_BUILD_TARGET=x86_64-pc-windows-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "CARGO_BUILD_TARGET=x86_64-unknown-linux-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File Out-File $env:GITHUB_ENV -Append
 
       - run: |
           gcc --version
