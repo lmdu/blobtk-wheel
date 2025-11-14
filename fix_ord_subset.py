@@ -11,12 +11,13 @@ with open(config_file, 'w') as fw:
 			#print(line, file=fw, end='')
 			#print('openssl = "0.10.75"', file=fw)
 			#print('hts-sys = "2.2.0"', file=fw)
-			#print('ord_subset = "3.1.2"', file=fw)
+			#
 			print('[target.x86_64-pc-windows-gnu]', file=fw)
 			print('linker = "/mingw64/bin/gcc.exe"', file=fw)
 			print('ar = "/mingw64/bin/ar.exe"', file=fw)
 			#print('rustflags = ["-C", "target-feature=+crt-static"]', file=fw)
 			print(file=fw)
-
-		#else:
-		print(line, file=fw, end='')
+			print(line, file=fw, end='')
+			print('ord_subset = "3.1.2"', file=fw)
+		else:
+			print(line, file=fw, end='')
