@@ -37,6 +37,15 @@ jobs:
             mingw-w64-x86_64-htslib
             base-devel
             autoconf
+            diffutils
+            tree
+
+      - run: |
+          tree /mingw64
+          which gcc
+          which ar
+          gcc --version
+          ar --version
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -101,11 +110,12 @@ jobs:
       #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
 
       - run: |
-          dir c:
-          dir c:\\mingw64
-
-      - run: |
           echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
           maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
+          echo "OPENSSL_DIR=/mingw64" >> $GITHUB_ENV
+          echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $GITHUB_ENV
+          echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $GITHUB_ENV
+          maturin build --release --out dist --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
+
 
       - run: ls -l dist
