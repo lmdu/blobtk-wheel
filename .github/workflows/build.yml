@@ -41,8 +41,7 @@ jobs:
             tree
 
       - run: |
-          echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
-          gcc --version
+          tree C:/msys64/mingw64
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -51,7 +50,9 @@ jobs:
           latest: true
           extract: true
 
-      - run: |
+      - name: Prepare files
+        shell: msys2 {0}
+        run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
           rm -rf ./genomehubs-blobtk-*
@@ -107,6 +108,7 @@ jobs:
       #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
 
       - run: |
+          echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
           maturin build --release --out dist --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
         # echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
         # maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
