@@ -6,9 +6,9 @@ jobs:
   build_wheels:
     name: Build on Windows
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
+    #defaults:
+    #  run:
+    #    shell: msys2 {0}
 
     steps:
       - uses: actions/checkout@v5
@@ -99,6 +99,10 @@ jobs:
       #    echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $env:GITHUB_ENV
       #    echo "OPENSSL_DIR=/mingw64" >> $env:GITHUB_ENV
       #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
+
+      - run: |
+          dir c:
+          dir c:\\mingw64
 
       - run: |
           echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
