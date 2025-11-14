@@ -41,8 +41,8 @@ jobs:
             tree
 
       - run: |
-          dir c:
-          dir c:\\mingw64
+          echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
+          gcc --version
 
       - uses: robinraju/release-downloader@v1
         with:
