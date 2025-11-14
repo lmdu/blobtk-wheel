@@ -28,9 +28,9 @@ jobs:
             mingw-w64-x86_64-zlib
             mingw-w64-x86_64-rust
             mingw-w64-x86_64-openssl
-            mingw-w64-x86_64-python
-            mingw-w64-x86_64-python-pip
-            mingw-w64-x86_64-python-maturin
+          #  mingw-w64-x86_64-python
+          #  mingw-w64-x86_64-python-pip
+          #  mingw-w64-x86_64-python-maturin
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-make
@@ -70,27 +70,17 @@ jobs:
       #  run: vcpkg install openssl:x64-windows
         #run: choco install openssl --no-progress
 
-      #- run: |
-        #  tree "C:\\Program Files\\OpenSSL" /f
-        #  dir C:/ProgramData/chocolatey
-        #  dir C:/ProgramData/chocolatey/lib/openssl
-        #  dir C:/vcpkg/packages/openssl_x64-windows
-        #  dir C:/vcpkg/packages/openssl_x64-windows/lib
-        #  dir C:/vcpkg/packages/openssl_x64-windows/include
-        #  dir C:/vcpkg/packages/openssl_x64-windows/include/openssl
-        #  echo "VCPKG_ROOT=C:/vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Append
-        #  echo "OPENSSL_DIR=C:/vcpkg/packages/openssl_x64-windows" | Out-File -FilePath $env:GITHUB_ENV -Append
-        #  echo "OPENSSL_LIB_DIR=C:/vcpkg/packages/openssl_x64-windows/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
-        #  echo "OPENSSL_INCLUDE_DIR=C:/vcpkg/packages/openssl_x64-windows/include" | Out-File -FilePath $env:GITHUB_ENV -Append
+      - run: |
+          echo "OPENSSL_DIR=C:/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "OPENSSL_LIB_DIR=C:/msys64/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "OPENSSL_INCLUDE_DIR=C:/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "RUST_BACKTRACE=1" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - run: |
+          gcc --version
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
-          CIBW_ENVIRONMENT_WINDOWS: |
-            CARGO_BUILD_TARGET="x86_64-pc-windows-gnu"
-            OPENSSL_LIB_DIR="C:\\msys64\\mingw64\\lib"
-            OPENSSL_DIR="C:\\msys64\\mingw64"
-            OPENSSL_INCLUDE_DIR=C:\\msys64\\mingw64\\include"
-            PATH="C:\\msys64\\mingw64\\bin;$PATH"
           CIBW_ARCHS_WINDOWS: auto64 
           CIBW_BUILD: cp310-*
           CIBW_SKIP: pp*
