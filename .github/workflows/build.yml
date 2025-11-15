@@ -17,6 +17,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
+          cache: false
           install: >-
             mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-autotools
@@ -51,7 +52,7 @@ jobs:
           mv genomehubs-blobtk-*/* .
           rm -rf ./genomehubs-blobtk-*
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.10'
 
@@ -74,7 +75,7 @@ jobs:
           echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - run: |
-          tree /f D:/a/_temp/msys/msys64/mingw64/bin
+          tree /f D:/a/_temp/msys/msys64
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
