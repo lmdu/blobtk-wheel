@@ -6,16 +6,16 @@ jobs:
   build_wheels:
     name: Build on Windows
     runs-on: windows-latest
-    #defaults:
-    #  run:
-    #    shell: msys2 {0}
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
       - uses: actions/checkout@v5
 
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: mingw64
+          msystem: MINGW64
           update: true
           install: >-
             mingw-w64-x86_64-autotools
@@ -32,11 +32,10 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-make
             mingw-w64-x86_64-htslib
-            mingw-w64-x86_64-maturin
+            mingw-w64-x86_64-python-pip
+            mingw-w64-x86_64-python-maturin
             base-devel
             autoconf
-            diffutils
-            tree
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -46,7 +45,7 @@ jobs:
           extract: true
 
       - name: Prepare files
-        shell: msys2 {0}
+        #shell: msys2 {0}
         run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
