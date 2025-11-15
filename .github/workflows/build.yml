@@ -17,7 +17,6 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          cache: false
           install: >-
             mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-autotools
@@ -75,8 +74,9 @@ jobs:
           echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - run: |
-          tree /f D:/a/_temp/msys/msys64
-          tree /f c:/msys64/mingw64/bin
+          tree /f d:/a/_temp/msys/msys64
+          tree /f C:/msys64/mingw64/bin
+          tree /f d:
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
