@@ -75,7 +75,7 @@ jobs:
           echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - run: |
-          tree C:/msys64/mingw64/bin
+          tree C:\\msys64\\mingw64\\bin
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
