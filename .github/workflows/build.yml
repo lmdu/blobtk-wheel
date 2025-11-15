@@ -64,13 +64,18 @@ jobs:
         #run: choco install openssl --no-progress
 
       - run: |
-          echo "/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
-          echo "OPENSSL_DIR=/mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_LIB_DIR=/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_INCLUDE_DIR=/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "RUST_BACKTRACE=full" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "CARGO_BUILD_TARGET=x86_64-pc-windows-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "/mingw64/bin" >> $env:GITHUB_PATH
+          echo "OPENSSL_DIR=/mingw64" >> $env:GITHUB_ENV
+          echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $env:GITHUB_ENV
+          echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
+          echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
+        #  echo "/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+        #  echo "OPENSSL_DIR=/mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "OPENSSL_LIB_DIR=/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "OPENSSL_INCLUDE_DIR=/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "RUST_BACKTRACE=full" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "CARGO_BUILD_TARGET=x86_64-pc-windows-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
+        #  echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - run: |
           which gcc
