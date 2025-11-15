@@ -15,7 +15,6 @@ jobs:
 
       - uses: msys2/setup-msys2@v2
         with:
-          location: '.'
           msystem: mingw64
           update: false
           install: >-
@@ -76,7 +75,7 @@ jobs:
           echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - run: |
-          tree ./msys64
+          tree /f c:/msys64
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
