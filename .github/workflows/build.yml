@@ -76,11 +76,11 @@ jobs:
       - name: install dependencies
         shell: msys2 {0}
         run: |
-          pacman --noconfirm -S mingw-w64-x86_64-toolchain
+          pacman --noconfirm -S --needed base-devel mingw-w64-x86_64-toolchain
 
       - run: |
           tree /f c:/msys64/mingw64
-          tree /f c:/mingw64
+          tree /f c:/msys64/bin
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
