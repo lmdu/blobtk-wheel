@@ -18,11 +18,11 @@ jobs:
           msystem: MINGW64
           update: true
           install: >-
+            mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-autotools
             mingw-w64-x86_64-bzip2
             mingw-w64-x86_64-curl
             mingw-w64-x86_64-libdeflate
-            mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-tools-git
             mingw-w64-x86_64-xz
             mingw-w64-x86_64-zlib
@@ -45,7 +45,7 @@ jobs:
           extract: true
 
       - name: Prepare files
-        shell: mingw64 {0}
+        shell: msys2 {0}
         run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
