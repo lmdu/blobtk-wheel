@@ -13,8 +13,8 @@ with open(config_file, 'w') as fw:
 			#print('hts-sys = "2.2.0"', file=fw)
 			#
 			print('[target.x86_64-pc-windows-gnu]', file=fw)
-			print('linker = "C:/msys64/mingw64/bin/gcc.exe"', file=fw)
-			print('ar = "C:/msys64/mingw64/bin/ar.exe"', file=fw)
+			print('linker = "/mingw64/bin/gcc.exe"', file=fw)
+			print('ar = "/mingw64/bin/ar.exe"', file=fw)
 			#print('rustflags = ["-C", "target-feature=+crt-static"]', file=fw)
 			print(file=fw)
 			print(line, file=fw, end='')

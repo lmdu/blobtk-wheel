@@ -32,6 +32,7 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-make
             mingw-w64-x86_64-htslib
+            mingw-w64-x86_64-rust
             mingw-w64-x86_64-python-pip
             mingw-w64-x86_64-python-maturin
             base-devel
@@ -80,7 +81,7 @@ jobs:
       - run: |
           which gcc
           gcc --version
-          rustup default stable-x86_64-pc-windows-gnu
+        #  rustup default stable-x86_64-pc-windows-gnu
 
       #- uses: pypa/cibuildwheel@v3.2.1
       #  env:
