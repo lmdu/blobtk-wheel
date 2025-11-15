@@ -76,6 +76,7 @@ jobs:
 
       - run: |
           tree /f D:/a/_temp/msys/msys64
+          tree /f c:/msys64/mingw64/bin
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
