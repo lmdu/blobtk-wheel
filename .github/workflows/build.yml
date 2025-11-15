@@ -6,9 +6,9 @@ jobs:
   build_wheels:
     name: Build on Windows
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
+    #defaults:
+    #  run:
+    #    shell: msys2 {0}
 
     steps:
       - uses: actions/checkout@v5
@@ -46,6 +46,7 @@ jobs:
           extract: true
 
       - name: Prepare files
+        shell: msys2 {0}
         run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
@@ -63,6 +64,11 @@ jobs:
       #- name: Install OpenSSL
       #  run: vcpkg install openssl:x64-windows
         #run: choco install openssl --no-progress
+
+      - run: |
+          dir D:/A/_temp
+          tree /f D:/A/_temp
+          tree /f D:/A
 
       - run: |
           echo "/mingw64/bin" >> $env:GITHUB_PATH
