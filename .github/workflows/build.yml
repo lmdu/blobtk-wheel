@@ -6,9 +6,9 @@ jobs:
   build_wheels:
     name: Build on Windows
     runs-on: windows-latest
-    #defaults:
-    #  run:
-    #    shell: mingw64 {0}
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
       - uses: actions/checkout@v5
@@ -45,7 +45,6 @@ jobs:
           extract: true
 
       - name: Prepare files
-        shell: msys2 {0}
         run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
@@ -65,18 +64,15 @@ jobs:
         #run: choco install openssl --no-progress
 
       - run: |
-          echo "c:/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
-          echo "OPENSSL_DIR=c:/msys64/mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_LIB_DIR=c:/msys64/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_INCLUDE_DIR=c:/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+          echo "OPENSSL_DIR=/mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "OPENSSL_LIB_DIR=/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "OPENSSL_INCLUDE_DIR=/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "RUST_BACKTRACE=full" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "CARGO_BUILD_TARGET=x86_64-pc-windows-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
           echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - run: |
-          tree /f d:/a/_temp/msys/msys64
-          tree /f C:/msys64/mingw64/bin
-          tree /f d:
           which gcc
           gcc --version
           rustup default stable-x86_64-pc-windows-gnu
