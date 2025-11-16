@@ -89,7 +89,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: x86_64-pc-windows-gnu
-          args: --release --out dist --find-interpreter -m rust/Cargo.toml --target x86_64-pc-windows-gnu
+          args: --release --out dist -m rust/Cargo.toml --target x86_64-pc-windows-gnu
           sccache: "true"
       #- run: |
       #    which gcc
