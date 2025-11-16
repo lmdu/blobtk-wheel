@@ -75,7 +75,10 @@ jobs:
       - run: |
           which gcc
           gcc --version
+          rustup show
           rustup toolchain install stable-x86_64-pc-windows-gnu
+          rustup default stable-x86_64-pc-windows-gnu
+          rustup show
 
       - uses: pypa/cibuildwheel@v3.2.1
         env:
