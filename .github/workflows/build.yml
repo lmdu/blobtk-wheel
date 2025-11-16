@@ -78,19 +78,19 @@ jobs:
           rustup target add x86_64-pc-windows-gnu
           rustup target list
 
-      - uses: pypa/cibuildwheel@v3.2.1
-        env:
-          CIBW_ARCHS_WINDOWS: auto64 
-          CIBW_BUILD: cp310-*
-          CIBW_SKIP: pp*
-        with:
-          package-dir: rust
-      #- name: build wheels
-      #  uses: PyO3/maturin-action@v1
+      #- uses: pypa/cibuildwheel@v3.2.1
+      #  env:
+      #    CIBW_ARCHS_WINDOWS: auto64 
+      #    CIBW_BUILD: cp310-*
+      #    CIBW_SKIP: pp*
       #  with:
-      #    target: x86_64-pc-windows-gnu
-      #    args: --release --out dist --find-interpreter -m rust/Cargo.toml
-      #    sccache: "true"
+      #    package-dir: rust
+      - name: build wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          target: x86_64-pc-windows-gnu
+          args: --release --out dist --find-interpreter -m rust/Cargo.toml --target x86_64-pc-windows-gnu
+          sccache: "true"
       #- run: |
       #    which gcc
       #    echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $env:GITHUB_ENV
