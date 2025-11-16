@@ -61,7 +61,7 @@ jobs:
         #run: choco install openssl --no-progress
 
       - run: |
-          tree /f D:/a/_temp/msys64/mingw64/include
+          tree /f D:/a/_temp/msys64/mingw64/include/openssl
 
       - run: |
           echo "D:/a/_temp/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
