@@ -32,7 +32,6 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-make
             mingw-w64-x86_64-htslib
-            mingw-w64-x86_64-rust
             mingw-w64-x86_64-python-pip
             mingw-w64-x86_64-python-maturin
             base-devel
@@ -67,7 +66,7 @@ jobs:
         #run: choco install openssl --no-progress
 
       - run: |
-          tree /f D:/a/_temp/msys64/mingw64
+          tree /f D:/a/_temp/msys64/mingw64/include
 
       - run: |
           echo "D:/a/_temp/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
