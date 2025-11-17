@@ -20,6 +20,10 @@ with open(config_file, 'w') as fw:
 			print(file=fw)
 			print(line, file=fw, end='')
 			print('ord_subset = "3.1.2"', file=fw)
+
+		elif line.startswith('rust-htslib'):
+			continue
+
 		else:
 			print(line, file=fw, end='')
 
