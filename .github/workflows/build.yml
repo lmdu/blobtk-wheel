@@ -49,6 +49,9 @@ jobs:
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
           rm -rf ./genomehubs-blobtk-*
+          rm rust/src/bam.rs
+          rm rust/src/filter.rs
+          rm rust/src/depth.rs
 
       - uses: actions/setup-python@v6
         with:
