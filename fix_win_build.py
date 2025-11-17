@@ -9,7 +9,7 @@ with open(config_file) as fh:
 with open(config_file, 'w') as fw:
 	for line in lines:
 		if line.startswith('version ='):
-			print('version = "0.4.7.post1"', file=fw)
+			print('version = "0.4.7-post1"', file=fw)
 
 		elif line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
