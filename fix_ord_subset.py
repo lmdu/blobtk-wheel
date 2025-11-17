@@ -31,8 +31,8 @@ with open(lib_file) as fh:
 	lines = fh.readlines()
 
 mods = [
-	'pub mod bam;'
-	'pub mod depth;'
+	'pub mod bam;',
+	'pub mod depth;',
 	'pub mod filter;'
 ]
 with open(lib_file, 'w') as fw:
