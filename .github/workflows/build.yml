@@ -17,24 +17,24 @@ jobs:
         with:
           msystem: MINGW64
           update: false
-          install: >-
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-bzip2
-            mingw-w64-x86_64-curl
-            mingw-w64-x86_64-xz
-            mingw-w64-x86_64-zlib
-            mingw-w64-x86_64-rust
-            mingw-w64-x86_64-openssl
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-make
-            mingw-w64-x86_64-htslib
-            mingw-w64-x86_64-sccache
-            mingw-w64-x86_64-python
-            mingw-w64-x86_64-python-cffi
-            mingw-w64-x86_64-python-pip
-            mingw-w64-x86_64-python-maturin
-            base-devel
-            openssl-devel
+    #      install: >-
+    #        mingw-w64-x86_64-toolchain
+    #        mingw-w64-x86_64-bzip2
+    #        mingw-w64-x86_64-curl
+    #        mingw-w64-x86_64-xz
+    #        mingw-w64-x86_64-zlib
+    #        mingw-w64-x86_64-rust
+    #        mingw-w64-x86_64-openssl
+    #        mingw-w64-x86_64-cmake
+    #        mingw-w64-x86_64-make
+    #        mingw-w64-x86_64-htslib
+    #        mingw-w64-x86_64-sccache
+    #        mingw-w64-x86_64-python
+    #        mingw-w64-x86_64-python-cffi
+    #        mingw-w64-x86_64-python-pip
+    #        mingw-w64-x86_64-python-maturin
+    #        base-devel
+    #        openssl-devel
 
       - uses: robinraju/release-downloader@v1
         with:
@@ -69,32 +69,32 @@ jobs:
       #  run: vcpkg install openssl:x64-windows
         #run: choco install openssl --no-progress
 
-      - run: |
-          tree /f D:/a/_temp/msys64/mingw64/include/openssl
+      #- run: |
+      #    tree /f D:/a/_temp/msys64/mingw64/include/openssl
 
-      - run: |
-          echo "D:/a/_temp/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
-          echo "OPENSSL_DIR=D:/a/_temp/msys64/mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_LIB_DIR=D:/a/_temp/msys64/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "OPENSSL_INCLUDE_DIR=D:/a/_temp/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "DEP_OPENSSL_INCLUDE=D:/a/_temp/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "RUST_BACKTRACE=full" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "CARGO_BUILD_TARGET=x86_64-pc-windows-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #- run: |
+      #    echo "D:/a/_temp/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+      #    echo "OPENSSL_DIR=D:/a/_temp/msys64/mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #    echo "OPENSSL_LIB_DIR=D:/a/_temp/msys64/mingw64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #    echo "OPENSSL_INCLUDE_DIR=D:/a/_temp/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #    echo "DEP_OPENSSL_INCLUDE=D:/a/_temp/msys64/mingw64/include" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #    echo "RUST_BACKTRACE=full" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #    echo "CARGO_BUILD_TARGET=x86_64-pc-windows-gnu" | Out-File -FilePath $env:GITHUB_ENV -Append
+      #    echo "CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - run: |
-          which gcc
-          gcc --version
-          rustup target add x86_64-pc-windows-gnu
-          rustup target list
+      #- run: |
+      #    which gcc
+      #    gcc --version
+      #    rustup target add x86_64-pc-windows-gnu
+      #    rustup target list
 
-      #- uses: pypa/cibuildwheel@v3.2.1
-      #  env:
-      #    CIBW_ARCHS_WINDOWS: auto64 
-      #    CIBW_BUILD: cp310-*
-      #    CIBW_SKIP: pp*
-      #  with:
-      #    package-dir: rust
+      - uses: pypa/cibuildwheel@v3.2.1
+        env:
+          CIBW_ARCHS_WINDOWS: auto64 
+          CIBW_BUILD: cp310-*
+          CIBW_SKIP: pp*
+        with:
+          package-dir: rust
       #- name: build wheels
       #  uses: PyO3/maturin-action@v1
       #  with:
@@ -107,14 +107,12 @@ jobs:
       #    echo "OPENSSL_DIR=/mingw64" >> $env:GITHUB_ENV
       #    echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $env:GITHUB_ENV
 
-      - run: |
-          maturin build --release --out dist --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
+      #- run: |
+      #    maturin build --release --out dist --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
         # echo "RUST_BACKTRACE=full" >> $env:GITHUB_ENV
         # maturin build --release --out dist --find-interpreter --manifest-path rust/Cargo.toml --target x86_64-pc-windows-gnu
         # echo "OPENSSL_DIR=/mingw64" >> $GITHUB_ENV
         # echo "OPENSSL_LIB_DIR=/mingw64/lib" >> $GITHUB_ENV
         # echo "OPENSSL_INCLUDE_DIR=/mingw64/include" >> $GITHUB_ENV
-          
 
-
-      - run: ls -l dist
+      - run: ls -l wheelhouse
