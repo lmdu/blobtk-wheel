@@ -8,16 +8,10 @@ with open(config_file) as fh:
 
 with open(config_file, 'w') as fw:
 	for line in lines:
-		if line.strip() == '[dependencies]':
-			#print(line, file=fw, end='')
-			#print('openssl = "0.10.75"', file=fw)
-			#print('hts-sys = "2.2.0"', file=fw)
-			#
-			#print('[target.x86_64-pc-windows-gnu]', file=fw)
-			#print('linker = "D:/a/_temp/msys64/mingw64/bin/gcc.exe"', file=fw)
-			#print('ar = "D:/a/_temp/msys64/mingw64/bin/ar.exe"', file=fw)
-			#print('rustflags = ["-C", "target-feature=+crt-static"]', file=fw)
-			#print(file=fw)
+		if line.startswith('version ='):
+			print('version = "0.4.7.post1"', file=fw)
+
+		elif line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
 			print('ord_subset = "3.1.2"', file=fw)
 
