@@ -52,6 +52,7 @@ jobs:
           rm rust/src/bam.rs
           rm rust/src/filter.rs
           rm rust/src/depth.rs
+          rm rust/src/python.rs
           rm rust/src/python/depth.rs
           rm rust/src/python/filter.rs
 

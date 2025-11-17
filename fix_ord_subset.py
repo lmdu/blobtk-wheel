@@ -33,7 +33,8 @@ with open(lib_file) as fh:
 mods = [
 	'pub mod bam;',
 	'pub mod depth;',
-	'pub mod filter;'
+	'pub mod filter;',
+	'pub mod python;'
 ]
 with open(lib_file, 'w') as fw:
 	for line in lines:
