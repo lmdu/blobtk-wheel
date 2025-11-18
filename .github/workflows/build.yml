@@ -31,7 +31,6 @@ jobs:
           rm rust/src/bam.rs
           rm rust/src/filter.rs
           rm rust/src/depth.rs
-          rm rust/src/python.rs
           rm rust/src/python/depth.rs
           rm rust/src/python/filter.rs
 
@@ -41,17 +40,13 @@ jobs:
 
       - run: python fix_win_build.py
 
-      #- uses: pypa/cibuildwheel@v3.2.1
-      #  env:
-      #    CIBW_ARCHS_WINDOWS: auto64
-      #    CIBW_BUILD: cp310-*
-      #    CIBW_SKIP: pp*
-      #  with:
-      #    package-dir: rust
-      - uses: PyO3/maturin-action@v1
+      - uses: pypa/cibuildwheel@v3.2.1
+        env:
+          CIBW_ARCHS_WINDOWS: auto64
+          CIBW_BUILD: cp310-*
+          CIBW_SKIP: pp*
         with:
-          command: build
-          args: --release --out wheelhouse --find-interpreter -m rust/Cargo.toml
+          package-dir: rust
 
       - run: ls -l wheelhouse
 

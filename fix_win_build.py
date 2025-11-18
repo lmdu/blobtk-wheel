@@ -4,6 +4,7 @@ __version__ = "0.4.7-post1"
 
 config_file = 'rust/Cargo.toml'
 lib_file = 'rust/src/lib.rs'
+py_file = 'rust/src/python.rs'
 
 with open(config_file) as fh:
 	lines = fh.readlines()
@@ -38,3 +39,25 @@ with open(lib_file, 'w') as fw:
 			continue
 
 		print(line, file=fw, end='')
+
+with open(py_file) as fh:
+	lines = fh.readlines()
+
+dels = [
+	'mod depth;',
+	'mod filter;',
+	'let filter = PyModule::new(py, "filter")?;',
+	'filter.add_function(wrap_pyfunction!(filter::fastx, m)?)?;',
+	'm.add_submodule(filter)?;',
+	'let depth = PyModule::new(py, "depth")?;',
+	'depth.add_function(wrap_pyfunction!(depth::bam_to_bed, m)?)?;',
+	'depth.add_function(wrap_pyfunction!(depth::bam_to_depth, m)?)?;',
+	'm.add_submodule(depth)?;'
+]
+with open(py_file, 'w') as fw:
+	for line in lines:
+		if line.strip() in dels:
+			continue
+
+		print(line, file=fw, end='')
+
