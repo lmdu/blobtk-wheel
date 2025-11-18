@@ -58,5 +58,7 @@ with open(py_file, 'w') as fw:
 		if line.strip() in dels:
 			continue
 
+		print(line)
+
 		print(line, file=fw, end='')
 
