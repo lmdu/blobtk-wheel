@@ -51,7 +51,12 @@ dels = [
 	'let depth = PyModule::new(py, "depth")?;',
 	'depth.add_function(wrap_pyfunction!(depth::bam_to_bed, m)?)?;',
 	'depth.add_function(wrap_pyfunction!(depth::bam_to_depth, m)?)?;',
-	'm.add_submodule(depth)?;'
+	'm.add_submodule(depth)?;',
+	'filter.add_function(wrap_pyfunction!(filter::fastx, &filter)?)?;',
+	'm.add_submodule(&filter)?;',
+    'depth.add_function(wrap_pyfunction!(depth::bam_to_bed, &depth)?)?;',
+    'depth.add_function(wrap_pyfunction!(depth::bam_to_depth, &depth)?)?;',
+    'm.add_submodule(&depth)?;',
 ]
 with open(py_file, 'w') as fw:
 	for line in lines:
