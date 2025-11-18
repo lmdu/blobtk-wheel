@@ -1,5 +1,7 @@
 import os
 
+__version__ = "0.4.7-post1"
+
 config_file = 'rust/Cargo.toml'
 lib_file = 'rust/src/lib.rs'
 
@@ -9,7 +11,7 @@ with open(config_file) as fh:
 with open(config_file, 'w') as fw:
 	for line in lines:
 		if line.startswith('version ='):
-			print('version = "0.4.7-post1"', file=fw)
+			print('version = "{}"'.format(__version__), file=fw)
 
 		elif line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
