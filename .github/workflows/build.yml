@@ -46,6 +46,7 @@ jobs:
           CIBW_ARCHS_WINDOWS: auto64 
           CIBW_BUILD: cp310-*
           CIBW_SKIP: pp*
+          CIBW_BEFORE_BUILD: pip install setuptools-rust
         with:
           package-dir: rust
 
