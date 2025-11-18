@@ -41,14 +41,17 @@ jobs:
 
       - run: python fix_win_build.py
 
-      - uses: pypa/cibuildwheel@v3.2.1
-        env:
-          CIBW_ARCHS_WINDOWS: auto64 
-          CIBW_BUILD: cp310-*
-          CIBW_SKIP: pp*
-          CIBW_BEFORE_BUILD: pip install setuptools-rust
+      #- uses: pypa/cibuildwheel@v3.2.1
+      #  env:
+      #    CIBW_ARCHS_WINDOWS: auto64
+      #    CIBW_BUILD: cp310-*
+      #    CIBW_SKIP: pp*
+      #  with:
+      #    package-dir: rust
+      - uses: PyO3/maturin-action@v1
         with:
-          package-dir: rust
+          command: build
+          args: --release --out wheelhouse --find-interpreter -m rust/Cargo.toml
 
       - run: ls -l wheelhouse
 
