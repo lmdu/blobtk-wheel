@@ -43,7 +43,7 @@ jobs:
       - uses: pypa/cibuildwheel@v3.2.1
         env:
           CIBW_ARCHS_WINDOWS: auto64
-          CIBW_BUILD: cp310-*
+          #CIBW_BUILD: cp310-*
           CIBW_SKIP: pp*
         with:
           package-dir: rust
@@ -58,4 +58,3 @@ jobs:
         if: github.ref_type == 'tag'
         with:
           files: ./wheelhouse/*.whl
-
