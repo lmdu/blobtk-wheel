@@ -44,7 +44,7 @@ jobs:
         env:
           CIBW_ARCHS_WINDOWS: auto64
           #CIBW_BUILD: cp310-*
-          CIBW_SKIP: pp*
+          CIBW_SKIP: pp* cp314-*
         with:
           package-dir: rust
 
