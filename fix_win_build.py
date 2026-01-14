@@ -1,6 +1,6 @@
 import os
 
-__version__ = "0.4.7-post1"
+__version__ = "0.7.9-post1"
 
 config_file = 'rust/Cargo.toml'
 lib_file = 'rust/src/lib.rs'
