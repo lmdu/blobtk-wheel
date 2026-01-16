@@ -4,15 +4,17 @@ on: [push, pull_request]
 
 jobs:
   build_wheels:
-    name: Build on Windows
-    runs-on: windows-latest
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-2022, ubuntu-22.04, macos-15, macos-15-intel]
 
     steps:
       - uses: actions/checkout@v5
 
-      - 
+      - uses: msys2/setup-msys2@v2
         if: runner.os == 'Windows'
-        uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
           update: false
@@ -25,7 +27,7 @@ jobs:
           extract: true
 
       - name: Prepare files
-        shell: msys2 {0}
+        #shell: msys2 {0}
         run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
