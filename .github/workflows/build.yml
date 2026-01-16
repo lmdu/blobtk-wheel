@@ -62,6 +62,7 @@ jobs:
           CIBW_ARCHS_WINDOWS: auto64
           #CIBW_BUILD: cp310-*
           CIBW_SKIP: pp* gp* cp314* *-musllinux*
+          CIBW_ENVIRONMENT: MACOSX_DEPLOYMENT_TARGET=10.12
         with:
           package-dir: rust
 
