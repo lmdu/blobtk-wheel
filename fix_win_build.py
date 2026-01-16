@@ -1,6 +1,6 @@
 import os
 
-__version__ = "0.7.9-post1"
+__version__ = "0.7.10-post1"
 
 config_file = 'rust/Cargo.toml'
 lib_file = 'rust/src/lib.rs'
@@ -11,8 +11,14 @@ with open(config_file) as fh:
 
 with open(config_file, 'w') as fw:
 	for line in lines:
+		if line[0] == '[':
+			segment = line.strip()[1:-1]
+
 		if line.startswith('version ='):
 			print('version = "{}"'.format(__version__), file=fw)
+
+		elif line.startswith('name =') and segment == 'package':
+			print('name = "blobtk-wheel"', file=fw)
 
 		elif line.strip() == '[dependencies]':
 			print(line, file=fw, end='')
