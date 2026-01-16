@@ -27,7 +27,20 @@ jobs:
           extract: true
 
       - name: Prepare files
-        #shell: msys2 {0}
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: |
+          rm -rf genomehubs-blobtk-*/.github
+          mv genomehubs-blobtk-*/* .
+          rm -rf ./genomehubs-blobtk-*
+          rm rust/src/bam.rs
+          rm rust/src/filter.rs
+          rm rust/src/depth.rs
+          rm rust/src/python/depth.rs
+          rm rust/src/python/filter.rs
+
+      - name: Prepare files
+        if: runner.os != 'Windows'
         run: |
           rm -rf genomehubs-blobtk-*/.github
           mv genomehubs-blobtk-*/* .
